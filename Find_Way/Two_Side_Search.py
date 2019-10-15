@@ -11,12 +11,12 @@ def Check_Can_Go(x,y,e,n,m):
     return True
 def TheWay(e,f,s,n,m):
     x,y=f
-    t=np.full((n,m),0)
+    t=np.full((n+1,m+1),0)
     while True:
         if((x,y)==s):
-            t[x][y]=1
+            t[x][y]=2
             return t
-        t[x][y]=1
+        t[x][y]=2
         #print(x,y)
         x,y=e[x][y]
 def Two_Side_Search(e,s,f,n,m):
@@ -43,11 +43,11 @@ def Two_Side_Search(e,s,f,n,m):
                 if(isVisit[x][y]==1):
                     #print(TheWay(theWay,(x,y),s,n,m))
                     #print(TheWay(theWay,(u,v),f,n,m))
-                    res=TheWay(theWay,(x,y),s,n,m)+TheWay(theWay,(u,v),f,n,m)
+                    res=TheWay(theWay,(x,y),s,n,m)+TheWay(theWay,(u,v),f,n,m)+e
                 if(isVisit[x][y]==2):
                     #print(TheWay(theWay,(x,y),f,n,m))
                     #print(TheWay(theWay,(u,v),s,n,m))
-                    res=TheWay(theWay,(x,y),f,n,m)+TheWay(theWay,(u,v),s,n,m)
+                    res=TheWay(theWay,(x,y),f,n,m)+TheWay(theWay,(u,v),s,n,m)+e
                 return res
             if(Check_Can_Go(u,v,e,n,m) and isVisit[u][v]==0):
                 isVisit[u][v]=t

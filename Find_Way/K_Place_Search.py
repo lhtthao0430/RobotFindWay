@@ -18,9 +18,9 @@ def TheWay(e,f,s,n,m,k):
     t=np.full((n+1,m+1),0)
     while True:
         if((x,y)==s):
-            t[x][y]=1
+            t[x][y]=2
             return t
-        t[x][y]=1
+        t[x][y]=2
         #print(x,y)
         x,y,c=e[x][y][c]
 def K_Place_Search(e,n,m,listPlace,s,f):
@@ -37,7 +37,7 @@ def K_Place_Search(e,n,m,listPlace,s,f):
         x,z,t=h.pop(0)
         x,y=x
         if((x,y)==f and t==k):
-            return TheWay(theWay,f,s,n,m,k)
+            return TheWay(theWay,f,s,n,m,k)+e
             #return "Find the way"
         for i in range(0,4,1):
             u=dx[i]+x
