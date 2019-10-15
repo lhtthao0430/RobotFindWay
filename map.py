@@ -1,6 +1,7 @@
 import numpy as np
 from Find_Way import Breadth_First_Search as BFS
-import drawmap2D
+import draw2Dmap
+import draw3Dmap
 input = open("input.txt", "r")
 
 m, n = input.readline().split(",")
@@ -26,10 +27,13 @@ for i in range (0, len(polygonList)):
 print(polygonList)
 input.close()
 
-map = np.full((n+1, m+1),0)
+map = np.full((m+1, n+1),0)
 for i in range(0, len(polygonList)):
     for j in range(0, len(polygonList[i]) - 4, 2):
-        map = BFS.Breadth_Fist_Search(map, (n - polygonList[i][j], polygonList[i][j + 1]), (n - polygonList[i][j + 2], polygonList[i][j + 3]), n, m)
-    map = BFS.Breadth_Fist_Search(map, (polygonList[i][0], n-polygonList[i][1]), (polygonList[i][len(polygonList[i]) - 1], n-polygonList[i][len(polygonList[i]) - 2]), n, m)
-print(map)
-drawmap2D.draw_map(n, m, map, 30)
+        #print((polygonList[i][j], n-polygonList[i][j + 1]), (polygonList[i][j + 2], n-polygonList[i][j + 3]))
+        map = BFS.Breadth_Fist_Search(map, (polygonList[i][j], n-polygonList[i][j + 1]), (polygonList[i][j + 2], n-polygonList[i][j + 3]), m, n)
+    map = BFS.Breadth_Fist_Search(map, (polygonList[i][0], n-polygonList[i][1]), (polygonList[i][len(polygonList[i]) - 2], n-polygonList[i][len(polygonList[i]) - 1]), m, n)
+    #draw2Dmap.draw2Dmap(n, m, map)
+#print(map)
+#draw2Dmap.draw2Dmap(n, m, map)
+draw3Dmap.draw3Dmap(m, n, map)
