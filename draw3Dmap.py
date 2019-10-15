@@ -10,8 +10,7 @@ CAPTION = "Map 3D"
 BACKGROUND = pg.Color("darkslategray")
 SCREEN_SIZE = (1200, 650)
 
-BASE_POINTS = np.array([[(-1, -1), (1, -1), (1, 1),
-                        (1, 1), (-1, 1), (-1, 1)]])
+BASE_POINTS = np.array([[(-1, -1), (1, -1), (1, 1), (-1, 1)]])
 
 TERRAIN = [("Map", 0.3),("Polygon", 0.8), ("Robot", 1)]
 
@@ -21,8 +20,8 @@ TERRAIN_COLORS = {"Map" : pg.Color("white"),
                   "Robot" : pg.Color("blue")}
 
 
-TERRAIN_HEIGHTS = {"Map" : 0,
-                   "Polygon": 5,
+TERRAIN_HEIGHTS = {"Map" : 5,
+                   "Polygon": 20,
                    "Robot": 10}
                    
 
@@ -212,7 +211,7 @@ def make_tiles(rot, scale, squash):
         surf = pg.Surface((max_x+border,max_y+height+border), flags=pg.SRCALPHA)
         top = points.tolist()
         poly = sorted(top, key=lambda p: p[1], reverse=True)
-        top_order = sorted(poly[:4])
+        top_order = sorted(poly[:3])
         bottom_order = [(x,y+height) for x,y in top_order]
         poly_order = bottom_order + top_order[::-1]
         pg.draw.polygon(surf, bottom_color, poly_order)
@@ -225,18 +224,9 @@ def make_tiles(rot, scale, squash):
     return tiles, (footprint.w//2, footprint.h//2)
     
 
-def main():
+def draw3Dmap(n, m, map):
     pg.init()
     pg.display.set_caption(CAPTION)
     pg.display.set_mode(SCREEN_SIZE)
-    n = 4
-    m = 4
-    map = np.full((n, m),0)
-    map[2][2] = 1
-    map[1][1]=2
     App(n, m, map).main_loop()
     pg.quit()
-
-
-if __name__ == "__main__":
-    main()
