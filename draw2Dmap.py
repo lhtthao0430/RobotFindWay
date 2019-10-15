@@ -99,8 +99,3 @@ def draw2Dmap(n, m, map):
     pg.display.set_mode(SCREEN_SIZE)
     App(n, m, map).main_loop()
     pg.quit()
-
-map = np.full([23, 19], 0)
-map[1][1] = 2
-map[2][2] = 1
-draw2Dmap(23, 19, map)
