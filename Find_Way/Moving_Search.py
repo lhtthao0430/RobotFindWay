@@ -27,14 +27,14 @@ def TheWay(theWay,f,s,n,m,e,e1,c):
                 t[c]=e
             else: 
                 t[c]=e1    
-            t[c][x][y]=-1
+            t[c][x][y]=2
             #print(t[0])
             return t
         if(c%2==0):
            t[c]=e
         else: 
             t[c]=e1    
-        t[c][x][y]=-1
+        t[c][x][y]=2
         #print(t[c])
         c=c-1
         #print(x,y)
