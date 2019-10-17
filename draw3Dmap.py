@@ -3,6 +3,7 @@ from __future__ import division
 import numpy as np
 import pygame as pg
 import opensimplex as simp
+import time
 
 
 CAPTION = "Map 3D"
@@ -12,33 +13,45 @@ SCREEN_SIZE = (1200, 650)
 
 BASE_POINTS = np.array([[(-1, -1), (1, -1), (1, 1), (-1, 1)]])
 
-TERRAIN = [("Map", 0.3),("Polygon", 0.8), ("Robot", 1)]
+TERRAIN = [("Map", 0.3),("Polygon", 0.8), ("Robot", 1), ("Start", 1), ("Goal", 1), ("Diamond", 1)]
 
 
 TERRAIN_COLORS = {"Map" : pg.Color("white"),
                   "Polygon" : pg.Color("red"),
-                  "Robot" : pg.Color("blue")}
+                  "Robot" : pg.Color("blue"),
+                  "Start" : pg.Color("green"),
+                  "Goal" : pg.Color("yellow"),
+                  "Diamond": pg.Color("grey")}
 
 
 TERRAIN_HEIGHTS = {"Map" : 5,
-                   "Polygon": 20,
-                   "Robot": 10}
+                   "Polygon": 10,
+                   "Robot": 20,
+                   "Start": 20,
+                   "Goal": 20,
+                   "Diamond": 20}
                    
 
 class MapGen(object):    
-    def __init__(self, size, listPoint):
+    def __init__(self, size, map):
         self.size = self.width, self.height = size
-        self.listPoint = listPoint
+        self.map = map
         self.terrain = self.gen_map()
 
     def gen_map(self):
         mapping = [["Map"]*self.height for _ in range(self.width)]
         for i in range(self.width):
             for j in range(self.height):
-                if self.listPoint[i][j] == 1:
+                if self.map[i][j] == 1:
                     mapping[i][j] = "Polygon"
-                elif self.listPoint[i][j] == 2:
+                elif self.map[i][j] == 2:
                     mapping[i][j] = "Robot"
+                elif self.map[i][j] == 3:
+                    mapping[i][j] = "Start"
+                elif self.map[i][j] == 4:
+                    mapping[i][j] = "Goal"
+                elif self.map[i][j] == 6:
+                    mapping[i][j] == "Diamond"
         return mapping
 
 
@@ -61,12 +74,12 @@ class RectTile(pg.sprite.Sprite):
 
 
 class Map(object):
-    def __init__(self, size, center, listPoint):
+    def __init__(self, size, center, map):
         self.width, self.height = size
         self.angle = 0
         self.squash_ratio = 0.5
         self.scale = 10
-        self.mapping = MapGen(size, listPoint)
+        self.mapping = MapGen(size, map)
         self.draw_order = None
         self.tiles, self.points = self.make_map()
         self.start_points = self.points.copy()
@@ -84,7 +97,7 @@ class Map(object):
                 biome = self.mapping.terrain[i][j]
                 pos = (col_offset*i, row_offset*j)
                 points.append(pos)
-                hextile = RectTile(biome, i*self.height+j, tiles)
+                recttile = RectTile(biome, i*self.height+j, tiles)
                 if i == self.width//2 and j == self.height//2:
                     self.center = pos
         points = np.array([points], dtype=float)
@@ -166,12 +179,12 @@ class Map(object):
             
 
 class App(object):
-    def __init__(self, n, m, listPoint):
+    def __init__(self, n, m, map):
         self.screen = pg.display.get_surface()
         self.screen_rect = self.screen.get_rect()
         self.clock = pg.time.Clock()
         self.done = False
-        self.map = Map((n,m), self.screen_rect.center, listPoint)
+        self.map = Map((n,m), self.screen_rect.center, map)
         
     def update(self):
         self.map.update()
@@ -194,6 +207,14 @@ class App(object):
             self.render()
             self.clock.tick(10)
 
+    def list_main_loop(self, n, m, maps):
+        for map in maps:
+            self.map = Map((n,m), self.screen_rect.center, map)
+            self.event_loop()
+            self.update()
+            self.render()
+            time.sleep(0.5)
+        self.main_loop()
 
 def make_tiles(rot, scale, squash):
     border = 2 if scale > 8 else 1
@@ -229,4 +250,11 @@ def draw3Dmap(n, m, map):
     pg.display.set_caption(CAPTION)
     pg.display.set_mode(SCREEN_SIZE)
     App(n, m, map).main_loop()
+    pg.quit()
+
+def draw3DMapList(n, m, maps):
+    pg.init()
+    pg.display.set_caption(CAPTION)
+    pg.display.set_mode(SCREEN_SIZE)
+    App(n,m, maps[0]).list_main_loop(n, m, maps)
     pg.quit()
