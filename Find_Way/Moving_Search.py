@@ -69,9 +69,3 @@ def Moving_Search(e,s,f,n,m):
                 isVisit[u][v]=t
                 h.append(((u,v),t))
                 theWay[u][v]=[x,y]    
-if __name__ == "__main__":
-   a=np.full((4+1,4+1),0)
-   a[3][2]=1
-   #print(a)
-   t=Moving_Search(a,(1,1),(3,3),4,4)
-   print(t)

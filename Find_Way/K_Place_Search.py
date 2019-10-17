@@ -23,7 +23,7 @@ def TheWay(e,f,s,n,m,k):
         t[x][y]=2
         #print(x,y)
         x,y,c=e[x][y][c]
-def K_Place_Search(e,n,m,listPlace,s,f):
+def K_Place_Search(e, s,f,n,m,listPlace):
     placeCount=len(listPlace)
     k=int(pow(2,placeCount))-1
     print(k)
@@ -55,8 +55,3 @@ def K_Place_Search(e,n,m,listPlace,s,f):
                 h.append(((u,v),c,d))
                 theWay[u][v][d]=[x,y,t]
 
-if __name__ == "__main__":
-    a=np.full((18+1,19+1),0)
-    l=[(1,2),(1,3),(8,9)]
-    t=K_Place_Search(a,18,19,l,(1,1),(10,10))
-    print(t)

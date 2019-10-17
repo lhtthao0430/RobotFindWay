@@ -19,7 +19,7 @@ def TheWay(e,f,s,n,m):
         t[x][y]=2
         #print(x,y)
         x,y=e[x][y]
-def Breadth_Fist_Search(e,s,f,n,m):
+def Breadth_First_Search(e,s,f,n,m):
     h=[]
     h.append((s,0))
     isVisit=np.full((n+1,m+1),0)
@@ -40,8 +40,3 @@ def Breadth_Fist_Search(e,s,f,n,m):
                 h.append(((u,v),t))
                 theWay[u][v]=[x,y]
 
-
-# if __name__ == "__main__":
-#    a=np.full((18+1,19+1),0)
-#    t=Breadth_Fist_Search(a,(1,1),(10,10),18,19)
-#    print(t)

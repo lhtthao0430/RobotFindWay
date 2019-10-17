@@ -27,7 +27,7 @@ def dfs(e,x,y,n,m,isVisit,TheWay):
             isVisit[u][v]=isVisit[x][y]+1
             TheWay[u][v]=[x,y]
             dfs(e,u,v,n,m,isVisit,TheWay)
-def Depth_Fist_Search(e,s,f,n,m):
+def Depth_First_Search(e,s,f,n,m):
     isVisit=np.full((n+1,m+1),np.inf)
     theWay=np.full((n+1,m+1,2),0)
     x,y=s
@@ -38,7 +38,3 @@ def Depth_Fist_Search(e,s,f,n,m):
     if(isVisit[x][y]==np.inf):
         return "Can't find the way"
     return TheWay(theWay,f,s,n,m)+e
-if __name__ == "__main__":
-   a=np.full((18+1,19+1),0)
-   t=Depth_Fist_Search(a,(1,1),(10,10),18,19)
-   print(t)
