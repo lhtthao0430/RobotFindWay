@@ -40,7 +40,7 @@ class Map(object):
         self.change = True
 
     def zoom(self, ammount):
-        self.scale = max(30, min(200, self.scale + ammount))
+        self.scale = max(20, min(200, self.scale + ammount))
         self.change = True
 
     def draw(self):
@@ -59,12 +59,6 @@ class Map(object):
                 self.zoom(-20)
             elif event.key == pg.K_SPACE:
                 self.reset()
-        elif event.type == pg.MOUSEBUTTONDOWN:
-            pg.mouse.get_rel()
-            if event.button == 4:
-                self.zoom(10)
-            elif event.button == 5:
-                self.zoom(-10)
 
 class App(object):
     def __init__(self, n, m, listPoint):
@@ -74,11 +68,6 @@ class App(object):
         
     def update(self):
         self.map.update()
-        pg.display.update()
-
-    def render(self):
-        self.screen.fill(BACKGROUND)
-        self.map.draw()
         pg.display.update()
 
     def event_loop(self):
@@ -92,6 +81,10 @@ class App(object):
             self.event_loop()
             self.update()
             self.clock.tick(10)
+            #self.screen.fill(BACKGROUND, (100, 0, 100, SCREEN_SIZE[1]))
+            button("BFS", 1, 1, 100, 50, BLUE, GREEN)
+            button("DFS", 1, 75, 100, 50, BLUE, GREEN)
+            button("TSS", 1, 150, 100, 50, BLUE, GREEN)
 
 def draw2Dmap(n, m, map):
     pg.init()
