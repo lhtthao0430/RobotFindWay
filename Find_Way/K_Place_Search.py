@@ -12,21 +12,27 @@ def Check_Can_Go(x,y,e,n,m):
     if(e[x][y]!=0): 
         return False
     return True
-def TheWay(e,f,s,n,m,k):
+def TheWay(theWay,f,s,n,m,k,c,e,listPlace):
     x,y=f
-    c=k
-    t=np.full((n+1,m+1),0)
+    z=k
+    #print(k)
+    t=np.full((c+1,n+1,m+1),0)
     while True:
+        t[c]=e
         if((x,y)==s):
-            t[x][y]=2
+            t[c][x][y]=2
             return t
-        t[x][y]=2
+        t[c][x][y]=2
+        if(x,y)in listPlace:
+            e[x][y]=6
+        #print(t[c])
         #print(x,y)
-        x,y,c=e[x][y][c]
+        c=c-1
+        x,y,z=theWay[x][y][z]
 def K_Place_Search(e, s,f,n,m,listPlace):
     placeCount=len(listPlace)
     k=int(pow(2,placeCount))-1
-    print(k)
+    #print(k)
     h=[]
     h.append((s,0,0))
     isVisit=np.full((n+1,m+1,k+1),0)
@@ -37,7 +43,7 @@ def K_Place_Search(e, s,f,n,m,listPlace):
         x,z,t=h.pop(0)
         x,y=x
         if((x,y)==f and t==k):
-            return TheWay(theWay,f,s,n,m,k)+e
+            return TheWay(theWay,f,s,n,m,k,z,e,listPlace)
             #return "Find the way"
         for i in range(0,4,1):
             u=dx[i]+x
