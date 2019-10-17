@@ -19,12 +19,13 @@ def TheWay(theWay,f,s,n,m,k,c,e,listPlace):
     t=np.full((c+1,n+1,m+1),0)
     while True:
         t[c]=e
-        if((x,y)==s):
+        if(c==0):
             t[c][x][y]=2
             return t
         t[c][x][y]=2
         if(x,y)in listPlace:
             e[x][y]=6
+            #print(e)
         #print(t[c])
         #print(x,y)
         c=c-1
@@ -53,6 +54,7 @@ def K_Place_Search(e, s,f,n,m,listPlace):
             for j in range(0,placeCount,1):
                 #print(listPlace[j])
                 if(listPlace[j]==(u,v)):
+                    #print("aa1")
                     d=setKthBit(d,j)
                     #print(j,d)
             if(Check_Can_Go(u,v,e,n,m) and isVisit[u][v][d]==0):

@@ -19,9 +19,9 @@ TERRAIN = [("Map", 0.3),("Polygon", 0.8), ("Robot", 1), ("Start", 1), ("Goal", 1
 TERRAIN_COLORS = {"Map" : pg.Color("white"),
                   "Polygon" : pg.Color("red"),
                   "Robot" : pg.Color("blue"),
-                  "Start" : pg.Color("green"),
-                  "Goal" : pg.Color("yellow"),
-                  "Diamond": pg.Color("grey")}
+                  "Start" : pg.Color("yellow"),
+                  "Goal" : pg.Color("green"),
+                  "Diamond": pg.Color("yellow")}
 
 
 TERRAIN_HEIGHTS = {"Map" : 5,
@@ -29,7 +29,7 @@ TERRAIN_HEIGHTS = {"Map" : 5,
                    "Robot": 20,
                    "Start": 20,
                    "Goal": 20,
-                   "Diamond": 20}
+                   "Diamond": 15}
                    
 
 class MapGen(object):    
@@ -51,7 +51,7 @@ class MapGen(object):
                 elif self.map[i][j] == 4:
                     mapping[i][j] = "Goal"
                 elif self.map[i][j] == 6:
-                    mapping[i][j] == "Diamond"
+                    mapping[i][j] = "Diamond"
         return mapping
 
 
@@ -245,7 +245,7 @@ def make_tiles(rot, scale, squash):
     return tiles, (footprint.w//2, footprint.h//2)
     
 
-def draw3Dmap(n, m, map):
+def draw3DMap(n, m, map):
     pg.init()
     pg.display.set_caption(CAPTION)
     pg.display.set_mode(SCREEN_SIZE)
