@@ -12,9 +12,12 @@ def Check_Can_Go(x,y,e,n,m):
 def Moving(e,n,m):
     e1=np.full((n+1,m+1),0)
     #print(e)
-    for i in range(0,n,1):
-        for j in range(0,m,1):
-            e1[i][j+1]=e[i][j]
+    for i in range(1,n,1):
+        for j in range(1,m,1):
+            if(e[i][j]!=0):
+                t=e[i][j]-10
+                print(t)
+                e1[i+dx[t]][j+dy[t]]=e[i][j]
     #print(e1)
     return e1
 def TheWay(theWay,f,s,n,m,e,e1,c):
@@ -71,7 +74,9 @@ def Moving_Search(e,s,f,n,m):
                 theWay[u][v]=[x,y]    
 if __name__ == "__main__":
    a=np.full((4+1,4+1),0)
-   a[3][2]=1
+   a[2][2]=11
+   a[3][3]=12
+   a[1][4]=13
    #print(a)
    t=Moving_Search(a,(1,1),(3,3),4,4)
    print(t)
