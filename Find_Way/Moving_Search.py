@@ -16,7 +16,7 @@ def Moving(e,n,m):
         for j in range(1,m,1):
             if(e[i][j]!=0):
                 t=e[i][j]-10
-                print(t)
+                #print(t)
                 e1[i+dx[t]][j+dy[t]]=e[i][j]
     #print(e1)
     return e1
