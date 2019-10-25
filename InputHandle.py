@@ -1,6 +1,6 @@
 import numpy as np 
 import time
-from skimage.draw import line
+from skimage.draw import polygon
 
 def textToMap(fileName):
 	input = open(fileName, "r")
@@ -26,7 +26,15 @@ def textToMap(fileName):
 	map = np.full((m+1, n+1), 0)
 	for i in range (0, t):
 		temp = input.readline().split(",")
+		r=[]
 		for j in range(0, len(temp), 2):
-			rr, cc = line(int(temp[j-2]), int(temp[j-1]), int(temp[j]), int(temp[j+1]))
-			map[rr, cc] = i % 4 + 11
+			r.append(int(temp[j]))
+		c=[]
+		for j in range(1, len(temp), 2):
+			c.append(int(temp[j]))
+		r=np.array(r)
+		c=np.array(c)
+		rr, cc = polygon(r,c)
+		map[rr, cc] = i % 4 + 11
+		
 	return m, n, map, sx, sy, gx, gy, k
