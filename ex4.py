@@ -12,7 +12,6 @@ if __name__ == "__main__":
     res = Moving_Search.Moving_Search(
         map, (sx, sy), (gx, gy), m, n)
     stop = timeit.default_timer()
-    print('map1, time: ', stop - start)
     if len(res) != 0:
         res[:, sx, sy] = 3
         res[:, gx, gy] = 4
@@ -20,7 +19,7 @@ if __name__ == "__main__":
         res[:, :, 0] = 1
         res[:, m, :] = 1
         res[:, :, n] = 1
-        draw3Dmap.draw3DMapList(m+1, n+1, res)
+        draw3Dmap.draw3DMapList(m+1, n+1, res, "MVS with map1", stop-start)
     else:
         map[sx, sy] = 3
         map[gx, gy] = 4
@@ -30,13 +29,12 @@ if __name__ == "__main__":
         map[:, n] = 1
         for i in k:
             map[i[0], i[1]] = 6
-        draw3Dmap.draw3DMap(m+1, n+1, map, res)
+        draw3Dmap.draw3DMap(m+1, n+1, map, res, "MVS with map1", stop-start)
     m, n, map, sx, sy, gx, gy, k = InputHandle.textToMap('map2.txt')
     start = timeit.default_timer()
     res = Moving_Search.Moving_Search(
         map, (sx, sy), (gx, gy), m, n)
     stop = timeit.default_timer()
-    print('map1, time: ', stop - start)
     if len(res) != 0:
         res[:, sx, sy] = 3
         res[:, gx, gy] = 4
@@ -44,7 +42,7 @@ if __name__ == "__main__":
         res[:, :, 0] = 1
         res[:, m, :] = 1
         res[:, :, n] = 1
-        draw3Dmap.draw3DMapList(m+1, n+1, res)
+        draw3Dmap.draw3DMapList(m+1, n+1, res, "MVS with map2", stop-start)
     else:
         map[sx, sy] = 3
         map[gx, gy] = 4
@@ -54,13 +52,12 @@ if __name__ == "__main__":
         map[:, n] = 1
         for i in k:
             map[i[0], i[1]] = 6
-        draw3Dmap.draw3DMap(m+1, n+1, map, res)
+        draw3Dmap.draw3DMap(m+1, n+1, map, res, "MVS with map2", stop-start)
     m, n, map, sx, sy, gx, gy, k = InputHandle.textToMap('map3.txt')
     start = timeit.default_timer()
     res = Moving_Search.Moving_Search(
         map, (sx, sy), (gx, gy), m, n)
     stop = timeit.default_timer()
-    print('map1, time: ', stop - start)
     if len(res) != 0:
         res[:, sx, sy] = 3
         res[:, gx, gy] = 4
@@ -68,7 +65,7 @@ if __name__ == "__main__":
         res[:, :, 0] = 1
         res[:, m, :] = 1
         res[:, :, n] = 1
-        draw3Dmap.draw3DMapList(m+1, n+1, res)
+        draw3Dmap.draw3DMapList(m+1, n+1, res, "MVS with map3", stop-start)
     else:
         map[sx, sy] = 3
         map[gx, gy] = 4
@@ -78,5 +75,5 @@ if __name__ == "__main__":
         map[:, n] = 1
         for i in k:
             map[i[0], i[1]] = 6
-        draw3Dmap.draw3DMap(m+1, n+1, map, res)
+        draw3Dmap.draw3DMap(m+1, n+1, map, res, "MVS with map3", stop-start)
     pass

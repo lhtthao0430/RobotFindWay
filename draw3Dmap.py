@@ -6,7 +6,6 @@ import opensimplex as simp
 import time
 
 
-CAPTION = "Map 3D"
 
 BACKGROUND = pg.Color("darkslategray")
 SCREEN_SIZE = (1200, 650)
@@ -95,6 +94,13 @@ class Map(object):
         self.recenter(center)
         self.change = True
         self.angle_delta = 60
+
+    def changeData(self, center, map):
+        self.mapping = MapGen(self.mapping.size, map)
+        self.tiles, self.points = self.make_map()
+        self.start_points = self.points.copy()
+        self.recenter(center)
+        self.change = True
 
     def make_map(self):
         tiles = pg.sprite.Group()
@@ -188,13 +194,14 @@ class Map(object):
             
 
 class App(object):
-    def __init__(self, n, m, map, res):
+    def __init__(self, n, m, map, res, run_time):
         self.screen = pg.display.get_surface()
         self.screen_rect = self.screen.get_rect()
         self.clock = pg.time.Clock()
         self.done = False
         self.map = Map((n,m), self.screen_rect.center, map)
         self.res = res
+        self.run_time = run_time
         
     def update(self):
         self.map.update()
@@ -202,6 +209,10 @@ class App(object):
     def render(self):
         self.screen.fill(BACKGROUND)
         self.map.draw(self.screen)
+        smallText = pg.font.Font('freesansbold.ttf',30)
+        TextSurf, TextRect = text_objects("Run time: " + str(round(self.run_time*1000,5)) + "ms", smallText)
+        TextRect.center = ((SCREEN_SIZE[0]-200),(SCREEN_SIZE[1]-50))
+        self.screen.blit(TextSurf, TextRect)
         if (len(self.res) == 0):
             largeText = pg.font.Font('freesansbold.ttf',115)
             TextSurf, TextRect = text_objects("Can't find the way", largeText)
@@ -224,7 +235,7 @@ class App(object):
 
     def list_main_loop(self, n, m, maps):
         for map in maps:
-            self.map = Map((n,m), self.screen_rect.center, map)
+            self.map.changeData(self.screen_rect.center, map)
             self.event_loop()
             self.update()
             self.render()
@@ -260,16 +271,24 @@ def make_tiles(rot, scale, squash):
     return tiles, (footprint.w//2, footprint.h//2)
     
 
-def draw3DMap(n, m, map, res):
+import os
+
+def draw3DMap(n, m, map, res, title, run_time):
+    x = 100
+    y = 0    
+    os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (x,y)
     pg.init()
-    pg.display.set_caption(CAPTION)
+    pg.display.set_caption(title)
     pg.display.set_mode(SCREEN_SIZE)
-    App(n, m, map, res).main_loop()
+    App(n, m, map, res, run_time).main_loop()
     pg.quit()
 
-def draw3DMapList(n, m, maps):
+def draw3DMapList(n, m, maps, title, run_time):
+    x = 100
+    y = 0    
+    os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (x,y)
     pg.init()
-    pg.display.set_caption(CAPTION)
+    pg.display.set_caption(title)
     pg.display.set_mode(SCREEN_SIZE)
-    App(n,m, maps[0], maps).list_main_loop(n, m, maps)
+    App(n,m, maps[0], maps, run_time).list_main_loop(n, m, maps)
     pg.quit()

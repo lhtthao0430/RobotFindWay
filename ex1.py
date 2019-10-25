@@ -12,7 +12,6 @@ if __name__ == "__main__":
     res = Breadth_First_Search.Breadth_First_Search(
         map, (sx, sy), (gx, gy), m, n)
     stop = timeit.default_timer()
-    print('map1, time: ', stop - start)
     if len(res) != 0:
         map = res
     map[sx][sy] = 3
@@ -21,13 +20,12 @@ if __name__ == "__main__":
     map[:, 0] = 1
     map[m, :] = 1
     map[:, n] = 1
-    draw3Dmap.draw3DMap(m+1, n+1, map, res)
+    draw3Dmap.draw3DMap(m+1, n+1, map, res, "BFS with map1", stop-start)
     m, n, map, sx, sy, gx, gy, k = InputHandle.textToMap('map2.txt')
     start = timeit.default_timer()
     res = Breadth_First_Search.Breadth_First_Search(
         map, (sx, sy), (gx, gy), m, n)
     stop = timeit.default_timer()
-    print('map2, time: ', stop - start)
     if len(res) != 0:
         map = res
     map[sx][sy] = 3
@@ -36,13 +34,12 @@ if __name__ == "__main__":
     map[:, 0] = 1
     map[m, :] = 1
     map[:, n] = 1
-    draw3Dmap.draw3DMap(m+1, n+1, map, res)
+    draw3Dmap.draw3DMap(m+1, n+1, map, res, "BFS with map2", stop-start)
     m, n, map, sx, sy, gx, gy, k = InputHandle.textToMap('map3.txt')
     start = timeit.default_timer()
     res = Breadth_First_Search.Breadth_First_Search(
         map, (sx, sy), (gx, gy), m, n)
     stop = timeit.default_timer()
-    print('map3, time: ', stop - start)
     if len(res) != 0:
         map = res
     map[sx][sy] = 3
@@ -51,5 +48,5 @@ if __name__ == "__main__":
     map[:, 0] = 1
     map[m, :] = 1
     map[:, n] = 1
-    draw3Dmap.draw3DMap(m+1, n+1, map, res)
+    draw3Dmap.draw3DMap(m+1, n+1, map, res, "BFS with map3", stop-start)
     pass
