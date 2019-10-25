@@ -31,6 +31,15 @@ TERRAIN_HEIGHTS = {"Map" : 5,
                    "Goal": 20,
                    "Diamond": 15}
                    
+                   
+def text_objects(text, font):
+    textSurface = font.render(text, True, pg.Color("black"))
+    return textSurface, textSurface.get_rect()
+
+def message_display(text):
+    largeText = pg.font.Font('freesansbold.ttf',115)
+    TextSurf, TextRect = text_objects(text, largeText)
+    TextRect.center = ((SCREEN_SIZE[0]/2),(SCREEN_SIZE[1]/2))
 
 class MapGen(object):    
     def __init__(self, size, map):
@@ -42,7 +51,7 @@ class MapGen(object):
         mapping = [["Map"]*self.height for _ in range(self.width)]
         for i in range(self.width):
             for j in range(self.height):
-                if self.map[i][j] == 1:
+                if self.map[i][j] == 1 or self.map[i][j] == 11 or self.map[i][j] == 12 or self.map[i][j] == 13 or self.map[i][j] == 14:
                     mapping[i][j] = "Polygon"
                 elif self.map[i][j] == 2:
                     mapping[i][j] = "Robot"
@@ -179,12 +188,13 @@ class Map(object):
             
 
 class App(object):
-    def __init__(self, n, m, map):
+    def __init__(self, n, m, map, res):
         self.screen = pg.display.get_surface()
         self.screen_rect = self.screen.get_rect()
         self.clock = pg.time.Clock()
         self.done = False
         self.map = Map((n,m), self.screen_rect.center, map)
+        self.res = res
         
     def update(self):
         self.map.update()
@@ -192,6 +202,11 @@ class App(object):
     def render(self):
         self.screen.fill(BACKGROUND)
         self.map.draw(self.screen)
+        if (len(self.res) == 0):
+            largeText = pg.font.Font('freesansbold.ttf',115)
+            TextSurf, TextRect = text_objects("Can't find the way", largeText)
+            TextRect.center = ((SCREEN_SIZE[0]/2),(SCREEN_SIZE[1]/1.5))
+            self.screen.blit(TextSurf, TextRect)
         pg.display.update()
 
     def event_loop(self):
@@ -213,7 +228,7 @@ class App(object):
             self.event_loop()
             self.update()
             self.render()
-            time.sleep(0.5)
+            time.sleep(0.2)
         self.main_loop()
 
 def make_tiles(rot, scale, squash):
@@ -245,16 +260,16 @@ def make_tiles(rot, scale, squash):
     return tiles, (footprint.w//2, footprint.h//2)
     
 
-def draw3DMap(n, m, map):
+def draw3DMap(n, m, map, res):
     pg.init()
     pg.display.set_caption(CAPTION)
     pg.display.set_mode(SCREEN_SIZE)
-    App(n, m, map).main_loop()
+    App(n, m, map, res).main_loop()
     pg.quit()
 
 def draw3DMapList(n, m, maps):
     pg.init()
     pg.display.set_caption(CAPTION)
     pg.display.set_mode(SCREEN_SIZE)
-    App(n,m, maps[0]).list_main_loop(n, m, maps)
+    App(n,m, maps[0], maps).list_main_loop(n, m, maps)
     pg.quit()
