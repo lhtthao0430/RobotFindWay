@@ -13,12 +13,14 @@ if __name__ == "__main__":
         map, (sx, sy), (gx, gy), m, n, k)
     stop = timeit.default_timer()
     if len(res) != 0:
+        cost =  len(res)
         res[:, sx, sy] = 3
         res[:, gx, gy] = 4
         res[:, 0, :] = 1
         res[:, :, 0] = 1
         res[:, m, :] = 1
         res[:, :, n] = 1
+        print(cost)
         draw3Dmap.draw3DMapList(m+1, n+1, res, "KPS with map1", stop-start)
     else:
         map[sx, sy] = 3
@@ -37,12 +39,14 @@ if __name__ == "__main__":
     stop = timeit.default_timer()
     print('map1, time: ', stop - start)
     if len(res) != 0:
+        cost =  len(res)
         res[:, sx, sy] = 3
         res[:, gx, gy] = 4
         res[:, 0, :] = 1
         res[:, :, 0] = 1
         res[:, m, :] = 1
         res[:, :, n] = 1
+        print(cost)
         draw3Dmap.draw3DMapList(m+1, n+1, res, "KPS with map2", stop-start)
     else:
         map[sx, sy] = 3
@@ -59,14 +63,15 @@ if __name__ == "__main__":
     res = K_Place_Search.K_Place_Search(
         map, (sx, sy), (gx, gy), m, n, k)
     stop = timeit.default_timer()
-    print('map1, time: ', stop - start)
     if len(res) != 0:
+        cost =  len(res)
         res[:, sx, sy] = 3
         res[:, gx, gy] = 4
         res[:, 0, :] = 1
         res[:, :, 0] = 1
         res[:, m, :] = 1
         res[:, :, n] = 1
+        print(cost)
         draw3Dmap.draw3DMapList(m+1, n+1, res, "KPS with map3", stop-start)
     else:
         map[sx, sy] = 3

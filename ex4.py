@@ -13,12 +13,14 @@ if __name__ == "__main__":
         map, (sx, sy), (gx, gy), m, n)
     stop = timeit.default_timer()
     if len(res) != 0:
+        cost =  len(res)
         res[:, sx, sy] = 3
         res[:, gx, gy] = 4
         res[:, 0, :] = 1
         res[:, :, 0] = 1
         res[:, m, :] = 1
         res[:, :, n] = 1
+        print(cost)
         draw3Dmap.draw3DMapList(m+1, n+1, res, "MVS with map1", stop-start)
     else:
         map[sx, sy] = 3
@@ -36,12 +38,14 @@ if __name__ == "__main__":
         map, (sx, sy), (gx, gy), m, n)
     stop = timeit.default_timer()
     if len(res) != 0:
+        cost =  len(res)
         res[:, sx, sy] = 3
         res[:, gx, gy] = 4
         res[:, 0, :] = 1
         res[:, :, 0] = 1
         res[:, m, :] = 1
         res[:, :, n] = 1
+        print(cost)
         draw3Dmap.draw3DMapList(m+1, n+1, res, "MVS with map2", stop-start)
     else:
         map[sx, sy] = 3
@@ -59,12 +63,14 @@ if __name__ == "__main__":
         map, (sx, sy), (gx, gy), m, n)
     stop = timeit.default_timer()
     if len(res) != 0:
+        cost =  len(res)
         res[:, sx, sy] = 3
         res[:, gx, gy] = 4
         res[:, 0, :] = 1
         res[:, :, 0] = 1
         res[:, m, :] = 1
         res[:, :, n] = 1
+        print(cost)
         draw3Dmap.draw3DMapList(m+1, n+1, res, "MVS with map3", stop-start)
     else:
         map[sx, sy] = 3
