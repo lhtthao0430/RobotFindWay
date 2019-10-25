@@ -1,4 +1,5 @@
 import numpy as np
+
 dx=[1,0,0,-1]
 dy=[0,-1,1,0]
 def Check_Can_Go(x,y,e,n,m):
@@ -26,7 +27,7 @@ def Breadth_First_Search(e,s,f,n,m):
     theWay=np.full((n+1,m+1,2),0)
     while True:
         if len(h)==0: 
-            return "Can't find the way"
+            return []
         x,z=h.pop(0)
         x,y=x
         if((x,y)==f):

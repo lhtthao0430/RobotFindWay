@@ -40,7 +40,7 @@ def K_Place_Search(e, s,f,n,m,listPlace):
     theWay=np.full((n+1,m+1,k+1,3),0)
     while True:
         if len(h)==0: 
-            return "Can't find the way"
+            return []
         x,z,t=h.pop(0)
         x,y=x
         if((x,y)==f and t==k):

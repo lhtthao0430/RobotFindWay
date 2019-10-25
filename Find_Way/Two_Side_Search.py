@@ -29,7 +29,7 @@ def Two_Side_Search(e,s,f,n,m):
     theWay=np.full((n+1,m+1,2),0)
     while True:
         if len(h)==0: 
-            return "Can't find the way"
+            return []
         x,z=h.pop(0)
         x,y=x
         for i in range(0,4,1):
