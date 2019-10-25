@@ -4,7 +4,7 @@ s: tọa độ điểm xuất phát
 f: tọa độ điểm cần đến
 n,m: kích thướt ma trận e
 Trả về
-    +"Can't find the way" nếu như k tìm được đường
+    + ma trận rỗng nếu như k tìm được đường
     + ma trận (N+1)*(M+1) chứa 0 và 1 trong đó 1 là ô thuộc đường đi cần tìm. 
 Ý tưởng: Bắt đầu từ điểm xuất phát và lần lượt nhìn các điểm kề với điểm gốc. Sau đó, với điểm đỉnh trong số đó, thuật toán lại lần lượt nhìn trước các điểm kề với nó mà chưa được quan sát trước đó và lặp lại cho tới khi tìm được điểm đến. 
 Thuật toán:
@@ -21,7 +21,7 @@ s: tọa độ điểm xuất phát
 f: tọa độ điểm cần đến
 n,m: kích thướt ma trận e
 Trả về
-    +"Can't find the way" nếu như k tìm được đường
+    + ma trận rỗng nếu như k tìm được đường
     + ma trận (N+1)*(M+1) chứa 0 và 1 trong đó 1 là ô thuộc đường đi cần tìm. 
 Ý tưởng: Bắt đầu từ điểm xuất phát và điểm đến lần lượt nhìn các điểm kề với chúng . Sau đó, với điểm đỉnh trong số đó, thuật toán lại lần lượt nhìn trước các điểm kề với nó mà chưa được quan sát trước đó và lặp lại cho tới khi tìm được đường đi từ 2 điểm gặp nhau.
 Thuật toán:
@@ -37,7 +37,7 @@ s: tọa độ điểm xuất phát
 f: tọa độ điểm cần đến
 n,m: kích thướt ma trận e
 Trả về
-    +"Can't find the way" nếu như k tìm được đường
+    + ma trận rỗng nếu như k tìm được đường
     + ma trận (N+1)*(M+1) chứa 0 và 1 trong đó 1 là ô thuộc đường đi cần tìm. 
 Ý tưởng: khởi đầu tại điểm xuất phát và phát triển xa nhất có thể theo mỗi nhánh. Quá trình tìm kiếm được phát triển tới điểm đến cần tìm hoặc tới một nút không có con. Khi đó giải thuật quay lui về đỉnh vừa mới tìm kiếm ở bước trước.
 Thuật toán:
@@ -56,7 +56,7 @@ lishPlace: danh sách cách địa điểm cần đi qua các điểm này khác
 s: tọa độ điểm xuất phát
 f: tọa độ điểm cần đến
 Trả về
-    +"Can't find the way" nếu như k tìm được đường
+    + ma trận rỗng nếu như k tìm được đường
     + ma trận (N+1)*(M+1) chứa 0 và 1 trong đó 1 là ô thuộc đường đi cần tìm.
 Ý tưởng: Bắt đầu từ điểm xuất phát và lần lượt nhìn các điểm kề với điểm gốc. Sau đó, với điểm đỉnh trong số đó, thuật toán lại lần lượt nhìn trước các điểm kề với nó mà chưa được quan sát trước đó và lặp lại cho tới khi tìm được điểm đến. 
 Thuật toán:
@@ -74,7 +74,7 @@ s: tọa độ điểm xuất phát
 f: tọa độ điểm cần đến
 n,m: kích thướt ma trận e
 Trả về
-    +"Can't find the way" nếu như k tìm được đường
+    + ma trận rỗng nếu như k tìm được đường
     + ma trận (C+1)(N+1)*(M+1) trong đó với mỗi ma trận 0<=i<=C là một ma trận 2 chiều là trạng thái của bước i trong cách đi tốt nhất
 Ý tưởng: Bắt đầu từ điểm xuất phát và lần lượt nhìn các điểm kề với điểm gốc. Sau đó, với điểm đỉnh trong số đó, thuật toán lại lần lượt nhìn trước các điểm kề với nó mà chưa được quan sát trước đó và lặp lại cho tới khi tìm được điểm đến. 
 Thuật toán:
